@@ -1,9 +1,9 @@
-def A100613(n): # based on second formula in A018805
-    if n == 0:
+from functools import cache
+@cache
+def f(n):
+    if n==0:
         return 0
-    c, j = 1, 2
-    k1 = n//j
-    while k1 > 1:
-        j2 = n//k1 + 1
-        c += (j2-j)*(k1**2-A100613(k1))
-        j, k1 = j2, n//j2
+    return n*n-sum([f(n//i) for i in range(2,n+1)])
+def g(n):
+    return 3*(n*n-f(n)+n-1)
+print(g(100000000))
